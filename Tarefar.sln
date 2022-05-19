@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefar.API", "Tarefar.API\Tarefar.API.csproj", "{C9DFAAE5-9C79-40FC-BCED-7DC06E75A706}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefar.DB", "Tarefar.DB\Tarefar.DB.csproj", "{DB65A4F4-8605-4280-BD0F-F1218433F287}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefar.Services", "Tarefar.Services\Tarefar.Services.csproj", "{AF2C2831-7C65-4117-9866-F7B8588126AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefar.Tests", "Tarefar.Tests\Tarefar.Tests.csproj", "{D7D3F874-20C0-42D1-8F9C-FAB408E5EEEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefar.Infra", "Tarefar.Infra\Tarefar.Infra.csproj", "{CDCC0F51-DADD-4681-898B-19054129646C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9DFAAE5-9C79-40FC-BCED-7DC06E75A706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DFAAE5-9C79-40FC-BCED-7DC06E75A706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DFAAE5-9C79-40FC-BCED-7DC06E75A706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DFAAE5-9C79-40FC-BCED-7DC06E75A706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB65A4F4-8605-4280-BD0F-F1218433F287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB65A4F4-8605-4280-BD0F-F1218433F287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB65A4F4-8605-4280-BD0F-F1218433F287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB65A4F4-8605-4280-BD0F-F1218433F287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF2C2831-7C65-4117-9866-F7B8588126AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF2C2831-7C65-4117-9866-F7B8588126AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF2C2831-7C65-4117-9866-F7B8588126AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF2C2831-7C65-4117-9866-F7B8588126AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D3F874-20C0-42D1-8F9C-FAB408E5EEEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D3F874-20C0-42D1-8F9C-FAB408E5EEEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D3F874-20C0-42D1-8F9C-FAB408E5EEEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D3F874-20C0-42D1-8F9C-FAB408E5EEEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDCC0F51-DADD-4681-898B-19054129646C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCC0F51-DADD-4681-898B-19054129646C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCC0F51-DADD-4681-898B-19054129646C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCC0F51-DADD-4681-898B-19054129646C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24CEE064-BF3E-462E-B8A9-D18DE59D0552}
+	EndGlobalSection
+EndGlobal
