@@ -3,6 +3,7 @@ using Tarefar.DB;
 using Tarefar.DB.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tarefar.Tests
 {
@@ -14,6 +15,7 @@ namespace Tarefar.Tests
         /// Create InMemoryContext to be used in tests
         /// </summary>
         /// <returns>The context</returns>
+        [ExcludeFromCodeCoverage]
         public ApiContext CreateNewInMemoryContext()
         {
             var options = new DbContextOptionsBuilder<ApiContext>()
@@ -30,6 +32,7 @@ namespace Tarefar.Tests
         /// </summary>
         /// <param name="context">The context</param>
         /// <param name="input">The values that shold be added</param>
+        [ExcludeFromCodeCoverage]
         private void _AddValues(ApiContext context)
         {
             if (UsersToAdd != null)
