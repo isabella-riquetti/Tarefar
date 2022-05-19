@@ -14,6 +14,25 @@ namespace Tarefar.DB
           : base(options)
         { }
 
+        public DbSet<Task> Tasks { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Task>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Tasks)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Task>()
+                .HasOne(x => x.ParentTask)
+                .WithMany(x => x.Reocurrencies)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
