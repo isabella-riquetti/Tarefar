@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tarefar.DB;
-using Tarefar.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Tarefar.DB;
+using Tarefar.DB.Models;
 
 namespace Tarefar.Tests
 {

@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Tarefar.DB.Models;
 using Tarefar.Infra.Models;
@@ -25,7 +23,7 @@ namespace Tarefar.API.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole<long>> _roleManager;
         private readonly IConfiguration _configuration;
-        
+
         public AuthenticateController(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole<long>> roleManager,
@@ -98,10 +96,10 @@ namespace Tarefar.API.Controllers
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Default))
                 await _roleManager.CreateAsync(new IdentityRole<long>(UserRoles.Default));
-            
+
             if (await _roleManager.RoleExistsAsync(UserRoles.Default))
                 await _userManager.AddToRoleAsync(user, UserRoles.Default);
-            
+
             return Ok("User created successfully!");
         }
 
@@ -119,7 +117,7 @@ namespace Tarefar.API.Controllers
             var user = await _userManager.FindByNameAsync(userName);
             if (user == null)
                 return StatusCode(StatusCodes.Status500InternalServerError, "User does not exists!");
-            
+
             if (!await _roleManager.RoleExistsAsync(role))
                 await _roleManager.CreateAsync(new IdentityRole<long>(role));
             else if (await _userManager.IsInRoleAsync(user, role))
@@ -151,9 +149,9 @@ namespace Tarefar.API.Controllers
 
             if (!await _userManager.IsInRoleAsync(user, role))
                 return Ok($"User '{userName}' already isn't a {role} user!");
-            
+
             await _userManager.RemoveFromRoleAsync(user, role);
-            
+
             return Ok($"User '{userName}' isn't a {role} user anymore!");
         }
     }

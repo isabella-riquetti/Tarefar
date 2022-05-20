@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Tarefar.Services.Model
+namespace Tarefar.Services
 {
     /// <summary>
     /// Create a response body to be used as default

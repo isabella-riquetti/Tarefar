@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using Tarefar.DB.Models;
-using System.IO;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Tarefar.DB.Models;
 
 namespace Tarefar.DB
 {
@@ -14,18 +13,18 @@ namespace Tarefar.DB
           : base(options)
         { }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Task>()
+            modelBuilder.Entity<Event>()
                 .HasOne(x => x.User)
-                .WithMany(x => x.Tasks)
+                .WithMany(x => x.Events)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Task>()
-                .HasOne(x => x.ParentTask)
+            modelBuilder.Entity<Event>()
+                .HasOne(x => x.Parent)
                 .WithMany(x => x.Reocurrencies)
                 .OnDelete(DeleteBehavior.Restrict);
 

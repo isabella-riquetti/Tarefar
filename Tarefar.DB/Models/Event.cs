@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tarefar.DB.Models
 {
-    public class Task
+    public class Event
     {
         [Key]
         [Required]
@@ -21,11 +21,10 @@ namespace Tarefar.DB.Models
         public string Name { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public bool AllDay { get; set; } = true;
-
-        public TimeSpan? Duration { get; set; }
 
         public ReocurrecyType ReocurrecyType { get; set; } = ReocurrecyType.Never;
         public int? ReocurrencyFrequency { get; set; }
@@ -40,11 +39,11 @@ namespace Tarefar.DB.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
-        public long? ParentTaskId { get; set; }
+        public long? ParentId { get; set; }
 
-        [ForeignKey("ParentTaskId")]
-        public virtual Task ParentTask { get; set; }
-        public virtual ICollection<Task> Reocurrencies { get; set; }
+        [ForeignKey("ParentId")]
+        public virtual Event Parent { get; set; }
+        public virtual ICollection<Event> Reocurrencies { get; set; }
     }
 
     public enum ReocurrecyType

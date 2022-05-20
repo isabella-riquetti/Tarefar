@@ -1,15 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
-using NSubstitute;
-using Xunit;
 using Microsoft.AspNetCore.Identity;
-using Tarefar.DB.Models;
-using Tarefar.API.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Tarefar.Services.Models.Authentication;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using NSubstitute;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Tarefar.API.Controllers;
+using Tarefar.DB.Models;
 using Tarefar.Infra.Models;
+using Tarefar.Services.Models.Authentication;
+using Xunit;
 
 namespace Tarefar.Tests.Controllers
 {
@@ -42,7 +42,7 @@ namespace Tarefar.Tests.Controllers
             userManagerSubstitute
                 .GetRolesAsync(Arg.Is(test.MockFindByNameAsyncResponse))
                 .Returns(Task.FromResult(test.MockGetRolesAsyncResponse));
-            
+
             var controller = new AuthenticateController(userManagerSubstitute, roleManagerSubstitute, _configurationSubstitute);
             IActionResult response = await controller.Login(test.Request);
 

@@ -1,18 +1,19 @@
-﻿using NSubstitute;
-using Xunit;
-using Tarefar.DB.Models;
-using System.Collections.Generic;
-using System;
+﻿using FluentAssertions;
 using Microsoft.Extensions.Configuration;
-using Tarefar.Services.Helpers;
+using Microsoft.IdentityModel.Tokens;
+using NSubstitute;
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using FluentAssertions;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Tarefar.DB.Models;
+using Tarefar.Services.Helpers;
+using Xunit;
 
 namespace Tarefar.Tests.Services.Helpers
-{    public class AuthenticationHelperTest
+{
+    public class AuthenticationHelperTests
     {
         #region GetToken
         [Theory, MemberData(nameof(GetTokenTests))]
