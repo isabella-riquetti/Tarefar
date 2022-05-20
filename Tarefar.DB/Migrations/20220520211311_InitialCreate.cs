@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -158,37 +158,37 @@ namespace Tarefar.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Events",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AllDay = table.Column<bool>(type: "bit", nullable: false),
-                    Duration = table.Column<TimeSpan>(type: "time", nullable: true),
                     ReocurrecyType = table.Column<int>(type: "int", nullable: false),
                     ReocurrencyFrequency = table.Column<int>(type: "int", nullable: true),
                     WeeklyReocurrencyType = table.Column<int>(type: "int", nullable: true),
                     MontlyReocurrencyType = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    ParentTaskId = table.Column<long>(type: "bigint", nullable: true)
+                    ParentId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_AspNetUsers_UserId",
+                        name: "FK_Events_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tasks_Tasks_ParentTaskId",
-                        column: x => x.ParentTaskId,
-                        principalTable: "Tasks",
+                        name: "FK_Events_Events_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -233,13 +233,13 @@ namespace Tarefar.DB.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ParentTaskId",
-                table: "Tasks",
-                column: "ParentTaskId");
+                name: "IX_Events_ParentId",
+                table: "Events",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_UserId",
-                table: "Tasks",
+                name: "IX_Events_UserId",
+                table: "Events",
                 column: "UserId");
         }
 
@@ -261,7 +261,7 @@ namespace Tarefar.DB.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

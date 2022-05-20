@@ -226,7 +226,7 @@ namespace Tarefar.DB.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Tarefar.DB.Models.Task", b =>
+            modelBuilder.Entity("Tarefar.DB.Models.Event", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,14 +240,11 @@ namespace Tarefar.DB.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan?>("Duration")
-                        .HasColumnType("time");
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("MontlyReocurrencyType")
                         .HasColumnType("int");
@@ -256,7 +253,7 @@ namespace Tarefar.DB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ParentTaskId")
+                    b.Property<long?>("ParentId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("ReocurrecyType")
@@ -264,6 +261,9 @@ namespace Tarefar.DB.Migrations
 
                     b.Property<int?>("ReocurrencyFrequency")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
@@ -273,11 +273,11 @@ namespace Tarefar.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentTaskId");
+                    b.HasIndex("ParentId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -331,30 +331,30 @@ namespace Tarefar.DB.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tarefar.DB.Models.Task", b =>
+            modelBuilder.Entity("Tarefar.DB.Models.Event", b =>
                 {
-                    b.HasOne("Tarefar.DB.Models.Task", "ParentTask")
+                    b.HasOne("Tarefar.DB.Models.Event", "Parent")
                         .WithMany("Reocurrencies")
-                        .HasForeignKey("ParentTaskId")
+                        .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Tarefar.DB.Models.ApplicationUser", "User")
-                        .WithMany("Tasks")
+                        .WithMany("Events")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("ParentTask");
+                    b.Navigation("Parent");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Tarefar.DB.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Tasks");
+                    b.Navigation("Events");
                 });
 
-            modelBuilder.Entity("Tarefar.DB.Models.Task", b =>
+            modelBuilder.Entity("Tarefar.DB.Models.Event", b =>
                 {
                     b.Navigation("Reocurrencies");
                 });

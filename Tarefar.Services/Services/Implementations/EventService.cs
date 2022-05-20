@@ -1,14 +1,19 @@
-﻿using Tarefar.DB.Models;
+﻿using System;
+using Tarefar.DB.Models;
+using Tarefar.Infra.UnitOfWork;
+using Tarefar.Services.Models.Events;
 
 namespace Tarefar.Services.Services.Implementations
 {
     public class EventService : IEventService
     {
-        /// <summary>
-        /// Extra validations that the data annotations are not validating
-        /// </summary>
-        /// <param name="obj">The event</param>
-        /// <returns>If the event is valid</returns>
+        private readonly IUnitOfWork _unitOfWork;
+
+        public EventService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public BaseResponse IsValid(Event obj)
         {
             if (obj == null)
@@ -34,6 +39,49 @@ namespace Tarefar.Services.Services.Implementations
             // May be extended
 
             return BaseResponse.CreateSuccess();
+        }
+
+        public BaseResponse Create(CreateEventModel newEvent)
+        {
+            var newEventValidation = IsValid(newEvent);
+            if (!newEventValidation.Success)
+                return newEventValidation;
+
+            _unitOfWork.Events.Add(newEvent);
+
+            if(newEvent.ReocurrecyType != ReocurrecyType.Never)
+                _AddReocurrencies(newEvent);
+
+            _unitOfWork.Commit();
+            return BaseResponse.CreateSuccess();
+        }
+
+        private void _AddReocurrencies(Event newEvent)
+        {
+            if(newEvent.ReocurrecyType == ReocurrecyType.Day)
+                _AddDailyReocurrence(newEvent);
+        }
+
+        private void _AddDailyReocurrence(Event newEvent)
+        {
+            Event child = newEvent.Clone();
+            child.ParentId = newEvent.Id;
+
+            DateTime finalDate = newEvent.StartDate.AddYears(1);
+            DateTime currentStartDate = newEvent.StartDate;
+            DateTime? currentEndDate = newEvent.EndDate;
+
+            while (currentStartDate < finalDate)
+            {
+                currentStartDate = currentStartDate.AddDays((int)newEvent.ReocurrencyFrequency);
+                currentEndDate = currentEndDate?.AddDays((int)newEvent.ReocurrencyFrequency);
+
+                var newChildEvent = newEvent.Clone();
+                newChildEvent.StartDate = currentStartDate;
+                newChildEvent.EndDate = currentEndDate;
+
+                _unitOfWork.Events.Add(newChildEvent);
+            }
         }
     }
 }

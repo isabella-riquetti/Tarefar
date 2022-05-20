@@ -12,6 +12,10 @@ using System;
 using System.Text;
 using Tarefar.DB;
 using Tarefar.DB.Models;
+using Tarefar.Infra.Repository;
+using Tarefar.Infra.UnitOfWork;
+using Tarefar.Services.Services;
+using Tarefar.Services.Services.Implementations;
 
 namespace Tarefar
 {
@@ -63,6 +67,10 @@ namespace Tarefar
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tarefar", Version = "v1" });
             });
+
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IEventService, EventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
